@@ -3,6 +3,8 @@ name: deploy_frontend
 on:
     push:
         branches: [ main ]
+        paths:
+        - 'frontend/**'
         
         
 jobs:
@@ -18,7 +20,7 @@ jobs:
       uses: azure/CLI@v1
       with:
         inlineScript: |
-            az storage blob upload-batch --overwrite --account-name azureresumeoscar --auth-mode key -d '$web' -s .
+            az storage blob upload-batch --overwrite --account-name azureresumeoscar --auth-mode key -d '$web' -s frontend/
     - name: Purge CDN endpoint
       uses: azure/CLI@v1
       with:
